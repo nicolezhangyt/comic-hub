@@ -1,0 +1,39 @@
+.comics {
+  margin: 20px;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-flow: nowrap; */
+}
+
+.comics li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #eee;
+  border-radius: 4px;
+  margin: 10px;
+  flex: 0 0 20%;
+  justify-content: space-evenly;
+}
+
+.comics li a {
+  text-decoration: none;
+}
+
+.comics title > li {
+  text-align: center;
+}
+.comics li:hover {
+  color: #607d8b;
+  background-color: #ddd;
+  left: 0.1em;
+}
+.comics li.selected {
+  background-color: #cfd8dc;
+  color: white;
+}
+.comics li.selected:hover {
+  background-color: #bbd8dc;
+  color: white;
+}
