@@ -10,6 +10,8 @@ import { catchError, tap } from "rxjs/operators";
   providedIn: "root"
 })
 export class ComicService {
+  comics = [];
+  selectedComicId;
   constructor(
     private http: HttpClient,
     private messageService: MessageService
@@ -19,35 +21,47 @@ export class ComicService {
   }
   private comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
 
+  // comicArray: Comics[];
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); 
+      console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }
 
-  getComics(): Observable<Comics[]> {
-    this.messageService.add("ComicService:fetched comics");
-    return this.http.get<Comics[]>(this.comicsUrl).pipe(
-      tap(_ => this.log("fetched comics")),
-      catchError(this.handleError<Comics[]>("getComics", []))
-    );
-    // return this.http.get<Comics[]>(this.comicsUrl).map((response:Response)=>{
-    //   return <Comics[]>response.json();
-    // })
-    // .catch(this.handleError<Comics[]>("getComics",[]));
+  addComics(comic) {
+    this.comics.push(...comic);
   }
 
-  getComic(id: number): Observable<Comics> {
-    const url = `${this.comicsUrl}/${id}`;
-    return this.http.get<Comics>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Comics>(`getComic id=${id}`))
-    );
-    // this.messageService.add(`MessageService: fetched comics id = ${id}`);
-    // return of(COMICS.find(comic => comic.id === id));
+  getComicsList() {
+    return this.comics;
   }
+
+  getCharacters() {
+    const selectedComic = this.comics.find(comic => comic.id === this.selectedComicId);
+    return selectedComic.characters;
+  }
+
+  clearCart() {
+    this.comics = [];
+    return this.comics;
+  }
+
+  setSelectedComicId(id: string) {
+    this.selectedComicId = id;
+  }
+
+  // getComic(id: number): Observable<Comics> {
+  //   const url = `${this.comicsUrl}/${id}`;
+  //   return this.http.get<Comics>(url).pipe(
+  //     tap(_ => this.log(`fetched hero id=${id}`)),
+  //     catchError(this.handleError<Comics>(`getComic id=${id}`))
+  //   );
+  //   // this.messageService.add(`MessageService: fetched comics id = ${id}`);
+  //   // return of(COMICS.find(comic => comic.id === id));
+  // }
 
   updateComic(comic: Comics): Observable<any> {
     return this.http.put(this.comicsUrl, comic, this.httpOptions).pipe(

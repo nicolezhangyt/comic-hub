@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'comics', component: ComicsComponent
   },
   { path: 'detail/:id', component: ComicDetailComponent },
-  { path: 'comics', component: ComicsComponent }
+  // { path: 'comics', component: ComicsComponent }
 
 ];
 
@@ -18,3 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+ 

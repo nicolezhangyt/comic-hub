@@ -1,7 +1,10 @@
-<div *ngIf="comic" class='comic-detail'>
-      <div>{{ comic.image }}</div>
-      <div>{{ comic.name }}</div>
-      <div>{{ comic.description }}</div>
-  <button (click)="goBack()">go back</button>
+<div *ngIf="characters" class='app-comic-detail'>
+  <ul *ngFor="let character of characters">
+      <li>{{ character.name }}</li>
+      <img src="{{ character.image }}" width="250px" height="400px" />
+      <li>{{ character.description }}</li>
+  </ul>
+<!--       
+   <button (click)="goBack()">go back</button> --> 
 </div>
 

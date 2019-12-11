@@ -10,8 +10,9 @@ import { Location } from "@angular/common";
   styleUrls: ["./comic-detail.component.css"]
 })
 export class ComicDetailComponent implements OnInit {
-   comic: Comics;
-
+  // @Input() comics: Comics[];
+  // comic: Comics;
+  characters;
   constructor(
     private route: ActivatedRoute,
     private comicService: ComicService,
@@ -19,20 +20,23 @@ export class ComicDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getComic();
+    this.characters = this.comicService.getCharacters();
   }
 
-  getComic(): void {
-    const id = +this.route.snapshot.paramMap.get("id");
-    this.comicService.getComic(id).subscribe(comic => (this.comic = comic));
-  }
-  
-  goBack() :void {
+  // getComic(): void {
+  //   const id = +this.route.snapshot.paramMap.get("id");
+  //   this.comicService.getComic(id).subscribe(comic => (this.comic = comic));
+  // }
+
+  // getComic():void{
+
+  // }
+
+  goBack(): void {
     this.location.back();
   }
 
-  save(): void {
-    this.comicService.updateComic(this.comic)
-      .subscribe(() => this.goBack());
-  }
+  // save(): void {
+  //   this.comicService.updateComic(this.comic).subscribe(() => this.goBack());
+  // }
 }

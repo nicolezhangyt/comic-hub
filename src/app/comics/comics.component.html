@@ -5,11 +5,12 @@
     [class.selected]="comic === selectedComic"
     (click)="onSelect(comic)"
   >
-    <a routerLink="/detail/{{ comic.id }}">
+    <!-- <a routerLink="/detail/{{ comic.id }}"> -->
       <img src="{{ comic.image }}" width="250px" height="400px" />
       <h3 class="title">{{ comic.name }}</h3>
       <div>{{ comic.description }}</div>
-    </a>
+    <!-- </a> -->
   </li>
 </ul>
-<!-- <app-comic-detail [comic]="selectedComics"></app-comic-detail> -->
+
+<!-- <app-comic-detail [comics]="comics"></app-comic-detail> -->
