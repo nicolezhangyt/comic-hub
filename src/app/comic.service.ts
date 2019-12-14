@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Comics } from "./comics/comics";
-import { COMICS } from "./comics/mock-comics";
+import { Comics, NewCharacter, NewCharacters } from "./comics/types";
 import { Observable, of } from "rxjs";
 import { MessageService } from "./message.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -11,7 +10,9 @@ import { catchError, tap } from "rxjs/operators";
 })
 export class ComicService {
   comics = [];
-  selectedComicId;
+  selectedComicId: string;
+  newCharacters: NewCharacter = {};
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
@@ -19,17 +20,14 @@ export class ComicService {
   private log(message: string) {
     this.messageService.add(`ComicService: ${message}`);
   }
-  private comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
 
-  // comicArray: Comics[];
-
-  private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
+  // private handleError<T>(operation = "operation", result?: T) {
+  //   return (error: any): Observable<T> => {
+  //     console.error(error);
+  //     this.log(`${operation} failed: ${error.message}`);
+  //     return of(result as T);
+  //   };
+  // }
 
   addComics(comic) {
     this.comics.push(...comic);
@@ -40,35 +38,40 @@ export class ComicService {
   }
 
   getCharacters() {
-    const selectedComic = this.comics.find(comic => comic.id === this.selectedComicId);
-    return selectedComic.characters;
+    const selectedComic = this.comics.find(
+      comic => comic.id === this.selectedComicId
+    );
+    return selectedComic ? selectedComic.characters : null;
   }
 
-  clearCart() {
-    this.comics = [];
-    return this.comics;
+  delelteNewCharacter(id: number) {
+    const filteredCharacter = this.newCharacters[this.selectedComicId].filter(
+      character => character.id != id
+    );
+    this.newCharacters[this.selectedComicId] = filteredCharacter;
   }
 
   setSelectedComicId(id: string) {
     this.selectedComicId = id;
   }
 
-  // getComic(id: number): Observable<Comics> {
-  //   const url = `${this.comicsUrl}/${id}`;
-  //   return this.http.get<Comics>(url).pipe(
-  //     tap(_ => this.log(`fetched hero id=${id}`)),
-  //     catchError(this.handleError<Comics>(`getComic id=${id}`))
-  //   );
-  //   // this.messageService.add(`MessageService: fetched comics id = ${id}`);
-  //   // return of(COMICS.find(comic => comic.id === id));
-  // }
-
-  updateComic(comic: Comics): Observable<any> {
-    return this.http.put(this.comicsUrl, comic, this.httpOptions).pipe(
-      tap(_ => this.log(`updated comic id=${comic.id}`)),
-      catchError(this.handleError<any>("updateComic"))
-    );
+  addNewCharacter(newCharacter: NewCharacter) {
+    if (!this.newCharacters[this.selectedComicId]) {
+      this.newCharacters[this.selectedComicId] = [];
+    }
+    this.newCharacters[this.selectedComicId].push(newCharacter);
   }
+
+  getNewCharacterList() {
+    return this.newCharacters[this.selectedComicId];
+  }
+
+  // updateComic(comic: Comics): Observable<any> {
+  //   return this.http.put(this.comicsUrl, comic, this.httpOptions).pipe(
+  //     tap(_ => this.log(`updated comic id=${comic.id}`)),
+  //     catchError(this.handleError<any>("updateComic"))
+  //   );
+  // }
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };

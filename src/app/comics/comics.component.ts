@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { COMICS } from "./mock-comics";
-import { Comics } from "./comics";
+import { Comics } from "./types";
 import { ComicService } from "../comic.service";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -33,9 +33,6 @@ export class ComicsComponent implements OnInit {
     }
   }
 
-  // getComics(): void {
-  //   this.comicService.getComics().subscribe(comics => (this.comics = comics));
-  // }
   private log(message: string) {
     this.messageService.add(`ComicService: ${message}`);
   }
@@ -60,4 +57,6 @@ export class ComicsComponent implements OnInit {
     this.comicService.setSelectedComicId(comic.id);
     this.router.navigate(["/detail", comic.id]);
   };
+
+  
 }

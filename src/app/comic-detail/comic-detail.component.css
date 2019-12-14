@@ -17,3 +17,7 @@ button{
     cursor: auto;
   }
  
+  .new-character-card {
+    max-width: 400px;
+  }
+  
