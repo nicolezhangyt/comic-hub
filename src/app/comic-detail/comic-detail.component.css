@@ -1,23 +1,81 @@
-button{
-    margin-top: 20px;
-    font-family: Arial;
-    background-color: #eee;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
-  }
-  button:hover {
-    background-color: #cfd8dc;
-  }
-  button:disabled {
-    background-color: #eee;
-    color: #ccc;
-    cursor: auto;
-  }
- 
-  .new-character-card {
-    max-width: 400px;
-  }
-  
+button {
+  margin: 30px 5px 50px 5px;
+}
+
+.new-character-card {
+  max-width: 400px;
+}
+
+.nav {
+  margin-left: 50px;
+  margin-right: 5px;
+  color: white;
+}
+
+.characterList {
+  list-style: none;
+}
+
+.content {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  padding: 50px 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 15px;
+}
+
+.content:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.intro {
+  margin-left: 50px;
+  margin-right: 100px;
+  line-height: 1.5em;
+}
+
+.toolbar {
+  background-color: rgb(64, 64, 64);
+  color: white;
+  margin-bottom: 50px;
+}
+
+.add-character {
+  margin-left: 150px;
+}
+
+.character-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.character-list li {
+  position: relative;
+  left: 0;
+  background-color: white;
+  border-radius: 4px;
+  margin: 10px;
+  flex: 0 0 12%;
+  justify-content: space-evenly;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 20px;
+}
+
+.character-list li:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.button-delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.image {
+  text-align: center;
+}

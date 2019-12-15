@@ -25,6 +25,7 @@ export class ComicDetailComponent implements OnInit {
   characters: character[];
   newCharactersList = [];
   newCharacter: NewCharacter = {};
+  selectedComicTitle: string = " ";
 
   constructor(private comicService: ComicService, public dialog: MatDialog) {}
 
@@ -35,23 +36,20 @@ export class ComicDetailComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-    
-      // Object.assign(result, {id: makeCounter()});
-
-      if (result) {
+      if (result && result.name) {
+        console.log("result", result);
         result.id = this.newCharactersList ? this.newCharactersList.length : 0;
         this.comicService.addNewCharacter(result);
         this.newCharactersList = this.comicService.getNewCharacterList();
       }
-      console.log("The dialog was closed", result);
       this.newCharacter = {};
     });
-
   }
 
   ngOnInit(): void {
     this.characters = this.comicService.getCharacters();
     this.newCharactersList = this.comicService.getNewCharacterList();
+    this.selectedComicTitle = this.comicService.getSelectedComicName();
   }
 
   onDeleteCharacter(id): void {
@@ -74,8 +72,4 @@ export class AddCharacterDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  // handleAdd(): void {
-  //   this.comicService.addNewCharacter(this.data);
-  // }
-  
 }

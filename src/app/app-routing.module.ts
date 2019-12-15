@@ -6,11 +6,16 @@ import { ComicDetailComponent } from './comic-detail/comic-detail.component';
 
 const routes: Routes = [
   {
-    path: 'comics', component: ComicsComponent
+    path: '', component: ComicsComponent,
+    data:{
+      breadcrum:'Home'
+    }
   },
-  { path: 'detail/:id', component: ComicDetailComponent },
-  // { path: 'comics', component: ComicsComponent }
-
+  { path: 'detail/:id', component: ComicDetailComponent ,
+  data:{
+    breadcrum:'Comic'
+  }
+  }
 ];
 
 @NgModule({

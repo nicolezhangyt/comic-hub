@@ -23,3 +23,9 @@ export interface NewCharacter {
 export interface NewCharacters {
   id: NewCharacter[];
 }
+
+
+export interface BreadCrumb {
+  label: string;
+  url: string;
+};

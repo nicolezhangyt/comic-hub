@@ -11,6 +11,7 @@ import { catchError, tap } from "rxjs/operators";
 export class ComicService {
   comics = [];
   selectedComicId: string;
+  selectedComicName: string;
   newCharacters: NewCharacter = {};
 
   constructor(
@@ -51,10 +52,15 @@ export class ComicService {
     this.newCharacters[this.selectedComicId] = filteredCharacter;
   }
 
-  setSelectedComicId(id: string) {
+  setSelectedComicId(id: string, name: string) {
     this.selectedComicId = id;
+    this.selectedComicName = name;
   }
 
+  getSelectedComicName() {
+    return this.selectedComicName;
+  }
+  
   addNewCharacter(newCharacter: NewCharacter) {
     if (!this.newCharacters[this.selectedComicId]) {
       this.newCharacters[this.selectedComicId] = [];

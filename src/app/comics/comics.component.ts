@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { COMICS } from "./mock-comics";
+import { Component, OnInit, Output } from "@angular/core";
 import { Comics } from "./types";
 import { ComicService } from "../comic.service";
 import { Observable, of } from "rxjs";
@@ -15,6 +14,7 @@ import { Router } from "@angular/router";
 })
 export class ComicsComponent implements OnInit {
   comics: Comics[];
+  selectedComicTitle: string = '';
   constructor(
     private comicService: ComicService,
     private http: HttpClient,
@@ -54,8 +54,9 @@ export class ComicsComponent implements OnInit {
   }
 
   onSelect = (comic: Comics) => {
-    this.comicService.setSelectedComicId(comic.id);
+    this.comicService.setSelectedComicId(comic.id, comic.name);
     this.router.navigate(["/detail", comic.id]);
+    this.selectedComicTitle = this.comicService.getSelectedComicName();
   };
 
   

@@ -1,12 +1,12 @@
-<h2>My comics</h2>
+<mat-toolbar class="toolbar"><div class="nav">Home</div></mat-toolbar>
 <ul class="comics">
   <li
     *ngFor="let comic of comics"
     [class.selected]="comic === selectedComic"
     (click)="onSelect(comic)"
   >
-    <img src="{{ comic.image }}" width="250px" height="400px" />
+    <p class="image"><img src="{{ comic.image }}" width="250px" height="320px" alt="{{comic.title}}" /></p>
     <h3 class="title">{{ comic.name }}</h3>
-    <div>{{ comic.description }}</div>
+    <div class="description">{{ comic.description }}</div>
   </li>
 </ul>

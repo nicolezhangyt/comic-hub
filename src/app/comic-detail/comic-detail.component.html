@@ -1,32 +1,49 @@
-<div *ngIf="characters" class="app-comic-detail">
-  <ul *ngFor="let character of characters">
-    <li>{{ character.name }}</li>
-    <img src="{{ character.image }}" width="250px" height="400px" />
-    <li>{{ character.description }}</li>
-  </ul>
-  <button mat-raised-button (click)="openDialog()">add character</button>
+<div>
+  <mat-toolbar class="toolbar">
+    <a class="nav" routerLink=""> Home </a> / {{ selectedComicTitle }}
+  </mat-toolbar>
+  <div>
+    <div *ngIf="characters" class="app-comic-detail">
+      <ul class="characterList" *ngFor="let character of characters">
+        <div class="content">
+          <div class="image">
+            <img src="{{ character.image }}" width="180px" height="250px" />
+          </div>
+          <div class="intro">
+            <h2>{{ character.name }}</h2>
+            {{ character.description }}
+          </div>
+        </div>
+      </ul>
+      <div class="add-character">
+        <button color="primary" mat-raised-button (click)="openDialog()">
+          Add character +
+        </button>
+      </div>
 
-  <div *ngIf="newCharactersList">
-    <ul *ngFor="let newcharacter of newCharactersList">
-      <mat-card class="new-character-card">
-        <!-- <img mat-card-image src= {{newcharacter.imageUrl}}> -->
-        <img
-          mat-card-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg "
-        />
-
-        <mat-card-content>
-          <p>
-            {{ newcharacter.name }}
-          </p>
-          <p>
-            {{ newcharacter.description }}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button (click)="onDeleteCharacter(newcharacter.id)">x</button>
-        </mat-card-actions>
-      </mat-card>
-    </ul>
+      <ul *ngIf="newCharactersList" class="character-list">
+        <li *ngFor="let newcharacter of newCharactersList">
+          <div class="new-character-card">
+            <div>
+              <div
+                class="button-delete"
+                (click)="onDeleteCharacter(newcharacter.id)"
+              >
+                X
+              </div>
+            </div>
+            <img
+              class="image"
+              src="{{ newcharacter.imageUrl }}"
+              onError="this.onerror=null;this.alt='Image not found';"
+              width="140px"
+              height="180px"
+            />
+            <h3>{{ newcharacter.name }}</h3>
+            <p>{{ newcharacter.description }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

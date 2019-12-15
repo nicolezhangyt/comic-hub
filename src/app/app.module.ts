@@ -16,7 +16,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -24,8 +25,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     ComicsComponent,
     ComicDetailComponent,
     MessagesComponent,
-    AddCharacterDialog,
-    BreadcrumbsComponent
+    AddCharacterDialog
   ],
   entryComponents: [AddCharacterDialog],
   imports: [
@@ -38,7 +38,9 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

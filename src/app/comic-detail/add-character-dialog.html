@@ -1,7 +1,12 @@
-<button mat-button (click)="onNoClick()">x</button>
 <div mat-dialog-content>
   <mat-form-field>
-    <input matInput placeholder="Name" required [(ngModel)]="data.name" />
+    <input
+      class="input"
+      matInput
+      placeholder="Name"
+      required
+      [(ngModel)]="data.name"
+    />
   </mat-form-field>
   <mat-form-field>
     <input
@@ -21,8 +26,10 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Close</button>
   <button
-    mat-button
+    color="primary"
+    mat-raised-button
     [mat-dialog-close]="data"
     cdkFocusInitial
   >
