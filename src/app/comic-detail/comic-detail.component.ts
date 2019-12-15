@@ -46,16 +46,30 @@ export class ComicDetailComponent implements OnInit {
     });
   }
 
+  openDeleteDialog(id: number): void {
+    const deleteDialogRef = this.dialog.open(DeleteCharacterDialog, {
+      width: "250px",
+      data: id
+    });
+    deleteDialogRef.afterClosed().subscribe(result => {
+      console.log("resultofdelete", result);
+      if (result === "yes") {
+        this.comicService.delelteNewCharacter(id);
+        this.newCharactersList = this.comicService.getNewCharacterList();
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.characters = this.comicService.getCharacters();
     this.newCharactersList = this.comicService.getNewCharacterList();
     this.selectedComicTitle = this.comicService.getSelectedComicName();
   }
 
-  onDeleteCharacter(id): void {
-    this.comicService.delelteNewCharacter(id);
-    this.newCharactersList = this.comicService.getNewCharacterList();
-  }
+  // onYesClick(id: number): void {
+  //   this.comicService.delelteNewCharacter(id);
+  //   this.newCharactersList = this.comicService.getNewCharacterList();
+  // }
 }
 
 @Component({
@@ -64,12 +78,30 @@ export class ComicDetailComponent implements OnInit {
 })
 export class AddCharacterDialog {
   constructor(
-    private comicService: ComicService,
     public dialogRef: MatDialogRef<AddCharacterDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: "delete-character-dialog",
+  templateUrl: "delete-character-dialog.html"
+})
+export class DeleteCharacterDialog {
+  constructor(
+    public deleteDialogRef: MatDialogRef<DeleteCharacterDialog>,
+    private comicService: ComicService // @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(): void {
+    this.deleteDialogRef.close();
+  }
+
+  onSubmit() {
+    this.deleteDialogRef.close("yes");
   }
 }

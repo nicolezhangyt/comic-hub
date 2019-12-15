@@ -1,7 +1,9 @@
 button {
-  margin: 30px 5px 50px 5px;
+  width: 130px;
+  height: 50px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 0px;
 }
-
 .new-character-card {
   max-width: 400px;
 }
@@ -43,7 +45,9 @@ button {
 }
 
 .add-character {
-  margin-left: 150px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
 .character-list {
@@ -78,4 +82,14 @@ button {
 
 .image {
   text-align: center;
+}
+
+.intro-highlight {
+  background-color: red;
+  font-size: 18px;
+  padding: 10px 20px;
+  width: 80px;
+  color: white;
+  float: right;
+  border-style:solid 1px;
 }

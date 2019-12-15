@@ -6,7 +6,8 @@ import { AppComponent } from "./app.component";
 import { ComicsComponent } from "./comics/comics.component";
 import {
   ComicDetailComponent,
-  AddCharacterDialog
+  AddCharacterDialog,
+  DeleteCharacterDialog
 } from "./comic-detail/comic-detail.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { HttpClientModule } from "@angular/common/http";
@@ -25,9 +26,10 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     ComicsComponent,
     ComicDetailComponent,
     MessagesComponent,
-    AddCharacterDialog
+    AddCharacterDialog,
+    DeleteCharacterDialog,
   ],
-  entryComponents: [AddCharacterDialog],
+  entryComponents: [AddCharacterDialog,DeleteCharacterDialog],
   imports: [
     BrowserModule,
     FormsModule,
