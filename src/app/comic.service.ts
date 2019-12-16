@@ -1,9 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Comics, NewCharacter, NewCharacters } from "./comics/types";
-import { Observable, of } from "rxjs";
-import { MessageService } from "./message.service";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, tap } from "rxjs/operators";
+import { NewCharacter } from "./comics/types";
+import { HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
@@ -12,23 +9,9 @@ export class ComicService {
   comics = [];
   selectedComicId: string;
   selectedComicName: string;
-  newCharacters: NewCharacter = {};
+  newCharacters = {};
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService
-  ) {}
-  private log(message: string) {
-    this.messageService.add(`ComicService: ${message}`);
-  }
-
-  // private handleError<T>(operation = "operation", result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(error);
-  //     this.log(`${operation} failed: ${error.message}`);
-  //     return of(result as T);
-  //   };
-  // }
+  constructor() {}
 
   addComics(comic) {
     this.comics.push(...comic);
@@ -60,7 +43,7 @@ export class ComicService {
   getSelectedComicName() {
     return this.selectedComicName;
   }
-  
+
   addNewCharacter(newCharacter: NewCharacter) {
     if (!this.newCharacters[this.selectedComicId]) {
       this.newCharacters[this.selectedComicId] = [];
@@ -72,12 +55,6 @@ export class ComicService {
     return this.newCharacters[this.selectedComicId];
   }
 
-  // updateComic(comic: Comics): Observable<any> {
-  //   return this.http.put(this.comicsUrl, comic, this.httpOptions).pipe(
-  //     tap(_ => this.log(`updated comic id=${comic.id}`)),
-  //     catchError(this.handleError<any>("updateComic"))
-  //   );
-  // }
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };

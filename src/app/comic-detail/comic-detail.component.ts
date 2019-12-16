@@ -4,7 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from "@angular/material/dialog";
-import { character, NewCharacter } from "../comics/types";
+import { character } from "../comics/types";
 import { ComicService } from "../comic.service";
 
 export interface DialogData {
@@ -24,7 +24,7 @@ export class ComicDetailComponent implements OnInit {
   imageUrl: string;
   characters: character[];
   newCharactersList = [];
-  newCharacter: NewCharacter = {};
+  newCharacter = {};
   selectedComicTitle: string = " ";
 
   constructor(private comicService: ComicService, public dialog: MatDialog) {}
@@ -65,11 +65,6 @@ export class ComicDetailComponent implements OnInit {
     this.newCharactersList = this.comicService.getNewCharacterList();
     this.selectedComicTitle = this.comicService.getSelectedComicName();
   }
-
-  // onYesClick(id: number): void {
-  //   this.comicService.delelteNewCharacter(id);
-  //   this.newCharactersList = this.comicService.getNewCharacterList();
-  // }
 }
 
 @Component({
@@ -94,7 +89,7 @@ export class AddCharacterDialog {
 export class DeleteCharacterDialog {
   constructor(
     public deleteDialogRef: MatDialogRef<DeleteCharacterDialog>,
-    private comicService: ComicService // @Inject(MAT_DIALOG_DATA) public data: DialogData
+    private comicService: ComicService
   ) {}
 
   onNoClick(): void {

@@ -2,9 +2,8 @@ import { Component, OnInit, Output } from "@angular/core";
 import { Comics } from "./types";
 import { ComicService } from "../comic.service";
 import { Observable, of } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, tap } from "rxjs/operators";
-import { MessageService } from "../message.service";
+import { HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 @Component({
@@ -14,11 +13,10 @@ import { Router } from "@angular/router";
 })
 export class ComicsComponent implements OnInit {
   comics: Comics[];
-  selectedComicTitle: string = '';
+  selectedComicTitle: string = "";
   constructor(
     private comicService: ComicService,
     private http: HttpClient,
-    private messageService: MessageService,
     private router: Router
   ) {}
 
@@ -33,31 +31,24 @@ export class ComicsComponent implements OnInit {
     }
   }
 
-  private log(message: string) {
-    this.messageService.add(`ComicService: ${message}`);
-  }
   private comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }
 
   getComics(): Observable<Comics[]> {
-    return this.http.get<Comics[]>(this.comicsUrl).pipe(
-      tap(_ => this.log("fetched comics")),
-      catchError(this.handleError<Comics[]>("getComics", []))
-    );
+    return this.http
+      .get<Comics[]>(this.comicsUrl)
+      .pipe(catchError(this.handleError<Comics[]>("getComics", [])));
   }
 
   onSelect = (comic: Comics) => {
     this.comicService.setSelectedComicId(comic.id, comic.name);
-    this.router.navigate(["/detail", comic.id]);
+    this.router.navigate(["/comics", comic.name.replace(/[^a-z0-9]+/gi, "-")]);
     this.selectedComicTitle = this.comicService.getSelectedComicName();
   };
-
-  
 }

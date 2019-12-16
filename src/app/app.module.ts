@@ -9,7 +9,6 @@ import {
   AddCharacterDialog,
   DeleteCharacterDialog
 } from "./comic-detail/comic-detail.component";
-import { MessagesComponent } from "./messages/messages.component";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -17,7 +16,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from "@angular/material/grid-list";
 import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
@@ -25,11 +24,10 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     AppComponent,
     ComicsComponent,
     ComicDetailComponent,
-    MessagesComponent,
     AddCharacterDialog,
-    DeleteCharacterDialog,
+    DeleteCharacterDialog
   ],
-  entryComponents: [AddCharacterDialog,DeleteCharacterDialog],
+  entryComponents: [AddCharacterDialog, DeleteCharacterDialog],
   imports: [
     BrowserModule,
     FormsModule,

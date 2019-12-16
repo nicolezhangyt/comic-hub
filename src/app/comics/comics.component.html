@@ -5,7 +5,15 @@
     [class.selected]="comic === selectedComic"
     (click)="onSelect(comic)"
   >
-    <p class="image"><img src="{{ comic.image }}" width="250px" height="320px" alt="{{comic.title}}" /></p>
+    <p class="image">
+      <img
+        class="cover"
+        src="{{ comic.image }}"
+        width="250px"
+        height="320px"
+        alt="{{ comic.title }}"
+      />
+    </p>
     <h3 class="title">{{ comic.name }}</h3>
     <div class="description">{{ comic.description }}</div>
   </li>

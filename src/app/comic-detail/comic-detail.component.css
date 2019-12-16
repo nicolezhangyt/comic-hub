@@ -84,12 +84,14 @@ button {
   text-align: center;
 }
 
-.intro-highlight {
+.banner {
   background-color: red;
   font-size: 18px;
   padding: 10px 20px;
   width: 80px;
   color: white;
   float: right;
-  border-style:solid 1px;
-}
+  border-style: solid 1px;
+  border-radius: 10px;
+  text-align: center;
+  }

@@ -1,6 +1,5 @@
-import { Component, Input, ViewChild, AfterViewInit } from "@angular/core";
-import { ComicsComponent } from "./comics/comics.component";
-import { Comics } from './comics/types';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -10,4 +9,9 @@ import { Comics } from './comics/types';
 export class AppComponent {
   comicTitle: string = "";
   title = "COMIC HUB";
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.navigate([""]);
+  }
 }

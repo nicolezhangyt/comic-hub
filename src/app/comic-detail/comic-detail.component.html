@@ -6,12 +6,6 @@
     <li *ngFor="let newcharacter of newCharactersList">
       <div class="new-character-card">
         <div>
-          <!-- <div
-                class="button-delete"
-                (click)="onDeleteCharacter(newcharacter.id)"
-              >
-                X
-              </div> -->
           <div
             class="button-delete"
             (click)="openDeleteDialog(newcharacter.id)"
@@ -39,7 +33,7 @@
             <img src="{{ character.image }}" width="180px" height="250px" />
           </div>
           <div *ngIf="character.numberOfRoles >= 2000" class="intro">
-            <span class="intro-highlight">Popular</span>
+            <span class="banner">Popular</span>
             <h2>{{ character.name }}</h2>
 
             {{ character.description }}
