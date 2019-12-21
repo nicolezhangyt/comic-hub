@@ -1,11 +1,22 @@
+.container {
+  margin-bottom: 70px;
+}
+
 button {
   width: 130px;
   height: 50px;
   border-top-right-radius: 15px;
   border-top-left-radius: 0px;
 }
-.new-character-card {
-  max-width: 400px;
+
+.character-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 5px;
+}
+
+.character-card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .nav {
@@ -14,14 +25,9 @@ button {
   color: white;
 }
 
-.characterList {
-  list-style: none;
-}
-
 .content {
-  display: flex;
-  width: 80%;
   margin: 0 auto;
+  width: 80%;
   padding: 50px 30px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -33,11 +39,18 @@ button {
 }
 
 .intro {
-  margin-left: 50px;
-  margin-right: 100px;
+  margin-left: 20px;
+  margin-right: 50px;
   line-height: 1.5em;
+  min-height: 270px;
 }
-
+.character-intro {
+  height: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 15px;
+  
+}
 .toolbar {
   background-color: rgb(64, 64, 64);
   color: white;
@@ -51,21 +64,32 @@ button {
 }
 
 .character-list {
+  width: 90%;
+  margin: 0 auto;
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+}
+.selectedComics {
+  padding-inline-start: 0px;
+}
+.characterList {
+  padding-inline-start: 0px;
 }
 
 .character-list li {
-  position: relative;
-  left: 0;
+  /* position: relative;
+  left: 0; */
   background-color: white;
   border-radius: 4px;
-  margin: 10px;
-  flex: 0 0 12%;
-  justify-content: space-evenly;
+  /* margin: 10px; */
+  /* flex: 0 0 12%; */
+  /* justify-content: space-evenly; */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 15px;
   padding: 20px;
 }
 
@@ -81,17 +105,27 @@ button {
 }
 
 .image {
+  float: left;
+  margin: 10px 20px;
+}
+
+.image > .cover {
+  object-fit: contain;
+}
+
+.character-image {
   text-align: center;
+  padding-top: 15px;
 }
 
 .banner {
   background-color: red;
-  font-size: 18px;
-  padding: 10px 20px;
-  width: 80px;
+  font-size: 13px;
+  padding: 5px 10px;
+  width: 30px;
   color: white;
-  float: right;
   border-style: solid 1px;
   border-radius: 10px;
   text-align: center;
-  }
+  margin-left: 10px;
+}

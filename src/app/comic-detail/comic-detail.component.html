@@ -1,7 +1,27 @@
-<div>
+<div class="container">
   <mat-toolbar class="toolbar">
     <a class="nav" routerLink=""> Home </a> / {{ selectedComicTitle }}
   </mat-toolbar>
+
+  <div *ngIf="selectedComics" class="app-comic-detail">
+    <ul class="selectedComics">
+      <div class="content">
+        <div class="image">
+          <img
+            class="cover"
+            src="{{ selectedComics.image }}"
+            width="180px"
+            height="260px"
+          />
+        </div>
+        <div class="intro">
+          <h2>{{ selectedComics.name }}</h2>
+          {{ selectedComics.description }}
+        </div>
+      </div>
+    </ul>
+  </div>
+  <!-- 
   <ul *ngIf="newCharactersList" class="character-list">
     <li *ngFor="let newcharacter of newCharactersList">
       <div class="new-character-card">
@@ -24,24 +44,34 @@
         <p>{{ newcharacter.description }}</p>
       </div>
     </li>
-  </ul>
+  </ul> -->
   <div>
-    <div *ngIf="characters" class="app-comic-detail">
+    <div *ngIf="characters" class="character-list">
       <ul class="characterList" *ngFor="let character of characters">
-        <div class="content">
-          <div class="image">
-            <img src="{{ character.image }}" width="180px" height="250px" />
+        <div class="character-card">
+          <div class="character-image" *ngIf="character.hasOwnProperty('image')">
+            <img
+              src="{{ character.image }}"
+              width="120px"
+              height="150px"
+            />
           </div>
-          <div *ngIf="character.numberOfRoles >= 2000" class="intro">
-            <span class="banner">Popular</span>
-            <h2>{{ character.name }}</h2>
-
+          <div class="character-image" *ngIf="character.hasOwnProperty('images')">
+              <img
+                src="{{ character.images }}"
+                width="120px"
+                height="150px"
+              />
+            </div>
+          <div *ngIf="character.numberOfRoles >= 2000" class="character-intro">
+            <h4>{{ character.name }}<span class="banner">Popular</span></h4>
             {{ character.description }}
           </div>
-          <div *ngIf="character.numberOfRoles < 2000" class="intro">
-            <h2>{{ character.name }}</h2>
+          <div *ngIf="character.numberOfRoles < 2000" class="character-intro">
+            <h4>{{ character.name }}</h4>
             {{ character.description }}
           </div>
+          <br />
         </div>
       </ul>
       <div class="add-character">

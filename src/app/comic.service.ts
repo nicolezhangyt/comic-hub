@@ -28,6 +28,14 @@ export class ComicService {
     return selectedComic ? selectedComic.characters : null;
   }
 
+  // newly added
+  getSelectedComic() {
+    const selectedComic = this.comics.find(
+      comic => comic.id === this.selectedComicId
+    );
+    return selectedComic ? selectedComic : null;
+  }
+
   delelteNewCharacter(id: number) {
     const filteredCharacter = this.newCharacters[this.selectedComicId].filter(
       character => character.id != id

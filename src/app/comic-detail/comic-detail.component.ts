@@ -4,7 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from "@angular/material/dialog";
-import { character } from "../comics/types";
+import { character, Comics } from "../comics/types";
 import { ComicService } from "../comic.service";
 
 export interface DialogData {
@@ -19,6 +19,7 @@ export interface DialogData {
   styleUrls: ["./comic-detail.component.css"]
 })
 export class ComicDetailComponent implements OnInit {
+  selectedComics: Comics;
   name: string;
   description: string;
   imageUrl: string;
@@ -64,6 +65,7 @@ export class ComicDetailComponent implements OnInit {
     this.characters = this.comicService.getCharacters();
     this.newCharactersList = this.comicService.getNewCharacterList();
     this.selectedComicTitle = this.comicService.getSelectedComicName();
+    this.selectedComics = this.comicService.getSelectedComic();
   }
 }
 
