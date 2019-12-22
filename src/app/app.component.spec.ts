@@ -16,18 +16,9 @@ describe("AppComponent", () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'comic-hub'`, () => {
+  it("should have title", () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual("comic-hub");
-  });
-
-  it("should render title", () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector(".content span").textContent).toContain(
-      "comic-hub app is running!"
-    );
+    expect(app.title).toContain("COMIC");
   });
 });

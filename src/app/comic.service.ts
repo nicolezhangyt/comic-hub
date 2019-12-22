@@ -7,9 +7,9 @@ import { HttpHeaders } from "@angular/common/http";
 })
 export class ComicService {
   comics = [];
-  selectedComicId: string;
   selectedComicName: string;
   newCharacters = {};
+  selectedComicId: string;
 
   constructor() {}
 
