@@ -43,6 +43,9 @@ export class ComicService {
     this.newCharacters[this.selectedComicId] = filteredCharacter;
   }
 
+ 
+
+
   setSelectedComicId(id: string, name: string) {
     this.selectedComicId = id;
     this.selectedComicName = name;
@@ -56,7 +59,8 @@ export class ComicService {
     if (!this.newCharacters[this.selectedComicId]) {
       this.newCharacters[this.selectedComicId] = [];
     }
-    this.newCharacters[this.selectedComicId].push(newCharacter);
+    this.newCharacters[this.selectedComicId].unshift(newCharacter);
+   
   }
 
   getNewCharacterList() {

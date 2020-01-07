@@ -21,39 +21,48 @@
       </div>
     </ul>
   </div>
-  <!-- 
-  <ul *ngIf="newCharactersList" class="character-list">
-    <li *ngFor="let newcharacter of newCharactersList">
-      <div class="new-character-card">
-        <div>
-          <div
-            class="button-delete"
-            (click)="openDeleteDialog(newcharacter.id)"
-          >
-            X
-          </div>
-        </div>
-        <img
-          class="image"
-          src="{{ newcharacter.imageUrl }}"
-          onError="this.onerror=null;this.alt='Image not found';"
-          width="140px"
-          height="180px"
-        />
-        <h3>{{ newcharacter.name }}</h3>
-        <p>{{ newcharacter.description }}</p>
-      </div>
-    </li>
-  </ul> -->
   <div>
-    <div *ngIf="characters" class="character-list">
-      <ul class="characterList" *ngFor="let character of characters">
+    <div *ngIf="allCharacters" class="character-list">
+      <!-- <div *ngIf="newCharactersList">
+        <ul class="characterList" *ngFor="let newcharacter of newCharactersList">
+          <div class="character-card">
+              <div
+                class="button-delete"
+                (click)="openDeleteDialog(newcharacter.id)"
+              >
+                X
+              </div>
+              <div class="character-image">
+            <img
+              src="{{ newcharacter.imageUrl }}"
+              onError="this.onerror=null;this.alt='Image not found';"
+              width="120px"
+              height="150px"
+            />
+            </div>
+            <div class="character-intro">
+            <h4>{{ newcharacter.name }}</h4>
+            {{ newcharacter.description }}
+            </div>
+          </div>
+        </ul>
+      </div> -->
+
+      <ul class="characterList" *ngFor="let character of allCharacters">
         <div class="character-card">
+          <div
+                *ngIf="!character.hasOwnProperty('numberOfRoles')"
+                class="button-delete"
+                (click)="openDeleteDialog(character.id)"
+              >
+                X
+              </div>
           <div class="character-image" *ngIf="character.hasOwnProperty('image')">
             <img
               src="{{ character.image }}"
               width="120px"
               height="150px"
+              onError="this.onerror=null;this.src='assets/img-error.png';"
             />
           </div>
           <div class="character-image" *ngIf="character.hasOwnProperty('images')">
@@ -67,7 +76,7 @@
             <h4>{{ character.name }}<span class="banner">Popular</span></h4>
             {{ character.description }}
           </div>
-          <div *ngIf="character.numberOfRoles < 2000" class="character-intro">
+          <div *ngIf="character.numberOfRoles < 2000 || !character.numberOfRoles " class="character-intro">
             <h4>{{ character.name }}</h4>
             {{ character.description }}
           </div>

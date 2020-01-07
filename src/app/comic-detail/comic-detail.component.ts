@@ -27,6 +27,9 @@ export class ComicDetailComponent implements OnInit {
   newCharactersList = [];
   newCharacter = {};
   selectedComicTitle: string = " ";
+  remoteCharacters: [];
+  localCharacters: [] = [];
+  allCharacters: any[];
 
   constructor(private comicService: ComicService, public dialog: MatDialog) {}
 
@@ -39,9 +42,15 @@ export class ComicDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.name) {
         console.log("result", result);
-        result.id = this.newCharactersList ? this.newCharactersList.length : 0;
+        result.id = this.localCharacters ? this.localCharacters.length : 0;
+        // result.id = (this.allCharacters.length + 1).toString();
+
         this.comicService.addNewCharacter(result);
-        this.newCharactersList = this.comicService.getNewCharacterList();
+        this.localCharacters = this.comicService.getNewCharacterList();
+        this.allCharacters = [
+          ...this.localCharacters,
+          ...this.remoteCharacters
+        ];
       }
       this.newCharacter = {};
     });
@@ -56,14 +65,23 @@ export class ComicDetailComponent implements OnInit {
       console.log("resultofdelete", result);
       if (result === "yes") {
         this.comicService.delelteNewCharacter(id);
-        this.newCharactersList = this.comicService.getNewCharacterList();
+        // const filteredCharacter = this.allCharacters.filter( character => character.id != id);
+
+        // this.allCharacters = filteredCharacter;
+       
+        this.localCharacters = this.comicService.getNewCharacterList();
       }
     });
   }
 
   ngOnInit(): void {
-    this.characters = this.comicService.getCharacters();
-    this.newCharactersList = this.comicService.getNewCharacterList();
+    this.remoteCharacters = this.comicService.getCharacters();
+
+    this.localCharacters = this.comicService.getNewCharacterList() || [];
+
+    this.allCharacters = [...this.localCharacters, ...this.remoteCharacters];
+
+    // this.newCharactersList = this.comicService.getNewCharacterList();
     this.selectedComicTitle = this.comicService.getSelectedComicName();
     this.selectedComics = this.comicService.getSelectedComic();
   }
