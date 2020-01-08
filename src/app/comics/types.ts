@@ -19,3 +19,10 @@ export interface NewCharacter {
   description: string;
   imageUrl: string;
 }
+
+export interface localCharacter {
+  id: number;
+  name: string;
+  description: string;
+  imageUrl: string;
+}

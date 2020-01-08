@@ -4,7 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from "@angular/material/dialog";
-import { character, Comics } from "../comics/types";
+import { character, Comics, localCharacter } from "../comics/types";
 import { ComicService } from "../comic.service";
 
 export interface DialogData {
@@ -28,7 +28,7 @@ export class ComicDetailComponent implements OnInit {
   newCharacter = {};
   selectedComicTitle: string = " ";
   remoteCharacters: [];
-  localCharacters: [] = [];
+  localCharacters: localCharacter[] = [];
   allCharacters: any[];
 
   constructor(private comicService: ComicService, public dialog: MatDialog) {}
@@ -43,8 +43,6 @@ export class ComicDetailComponent implements OnInit {
       if (result && result.name) {
         console.log("result", result);
         result.id = this.localCharacters ? this.localCharacters.length : 0;
-        // result.id = (this.allCharacters.length + 1).toString();
-
         this.comicService.addNewCharacter(result);
         this.localCharacters = this.comicService.getNewCharacterList();
         this.allCharacters = [
@@ -65,23 +63,19 @@ export class ComicDetailComponent implements OnInit {
       console.log("resultofdelete", result);
       if (result === "yes") {
         this.comicService.delelteNewCharacter(id);
-        // const filteredCharacter = this.allCharacters.filter( character => character.id != id);
-
-        // this.allCharacters = filteredCharacter;
-       
         this.localCharacters = this.comicService.getNewCharacterList();
+        this.allCharacters =  [
+          ...this.localCharacters,
+          ...this.remoteCharacters
+        ];
       }
     });
   }
 
   ngOnInit(): void {
     this.remoteCharacters = this.comicService.getCharacters();
-
     this.localCharacters = this.comicService.getNewCharacterList() || [];
-
     this.allCharacters = [...this.localCharacters, ...this.remoteCharacters];
-
-    // this.newCharactersList = this.comicService.getNewCharacterList();
     this.selectedComicTitle = this.comicService.getSelectedComicName();
     this.selectedComics = this.comicService.getSelectedComic();
   }

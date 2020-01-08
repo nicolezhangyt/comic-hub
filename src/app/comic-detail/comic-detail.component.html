@@ -57,6 +57,13 @@
               >
                 X
               </div>
+              <div
+              *ngIf="character.hasOwnProperty('numberOfRoles')"
+              class="button-delete"
+              (click)="openDeleteDialog(character.id)"
+            >
+              <br/>
+            </div>
           <div class="character-image" *ngIf="character.hasOwnProperty('image')">
             <img
               src="{{ character.image }}"

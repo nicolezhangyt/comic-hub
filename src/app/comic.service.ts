@@ -67,6 +67,7 @@ export class ComicService {
     return this.newCharacters[this.selectedComicId];
   }
 
+
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
