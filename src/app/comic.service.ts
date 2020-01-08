@@ -1,6 +1,10 @@
 import { Injectable } from "@angular/core";
-import { NewCharacter } from "./comics/types";
+import { NewCharacter, Comics } from "./comics/types";
+import { Observable, of } from "rxjs";
 import { HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +15,24 @@ export class ComicService {
   newCharacters = {};
   selectedComicId: string;
 
-  constructor() {}
+  constructor(
+    private http: HttpClient,
+  ) {}
+
+  private comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
+
+  private handleError<T>(operation = "operation", result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  }
+
+  getComics(): Observable<Comics[]> {
+    return this.http
+      .get<Comics[]>(this.comicsUrl)
+      .pipe(catchError(this.handleError<Comics[]>("getComics", [])));
+  }
 
   addComics(comic) {
     this.comics.push(...comic);
@@ -28,7 +49,7 @@ export class ComicService {
     return selectedComic ? selectedComic.characters : null;
   }
 
-  // newly added
+
   getSelectedComic() {
     const selectedComic = this.comics.find(
       comic => comic.id === this.selectedComicId

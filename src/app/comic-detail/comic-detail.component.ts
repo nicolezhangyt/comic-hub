@@ -6,6 +6,7 @@ import {
 } from "@angular/material/dialog";
 import { character, Comics, localCharacter } from "../comics/types";
 import { ComicService } from "../comic.service";
+import { ActivatedRoute } from "@angular/router";
 
 export interface DialogData {
   name: string;
@@ -27,11 +28,17 @@ export class ComicDetailComponent implements OnInit {
   newCharactersList = [];
   newCharacter = {};
   selectedComicTitle: string = " ";
-  remoteCharacters: [];
+  remoteCharacters: any[];
   localCharacters: localCharacter[] = [];
   allCharacters: any[];
+  comics: Comics[];
+  id: string;
 
-  constructor(private comicService: ComicService, public dialog: MatDialog) {}
+  constructor(
+    private comicService: ComicService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCharacterDialog, {
@@ -64,7 +71,7 @@ export class ComicDetailComponent implements OnInit {
       if (result === "yes") {
         this.comicService.delelteNewCharacter(id);
         this.localCharacters = this.comicService.getNewCharacterList();
-        this.allCharacters =  [
+        this.allCharacters = [
           ...this.localCharacters,
           ...this.remoteCharacters
         ];
@@ -73,11 +80,30 @@ export class ComicDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.remoteCharacters = this.comicService.getCharacters();
-    this.localCharacters = this.comicService.getNewCharacterList() || [];
-    this.allCharacters = [...this.localCharacters, ...this.remoteCharacters];
-    this.selectedComicTitle = this.comicService.getSelectedComicName();
-    this.selectedComics = this.comicService.getSelectedComic();
+    if (!this.comicService.getComicsList().length) {
+      this.comicService.getComics().subscribe(comics => {
+        this.comicService.addComics(comics);
+        this.comics = this.comicService.getComicsList();
+        this.id = this.route.snapshot.paramMap.get("id");
+        this.selectedComics = this.comics.find(comic => comic.id == this.id);
+        this.selectedComicTitle = this.comics.find(
+          comic => comic.id == this.id
+        ).name;
+        this.remoteCharacters = this.selectedComics.characters;
+        this.localCharacters = this.localCharacters =
+          this.comicService.getNewCharacterList() || [];
+        this.allCharacters = [
+          ...this.localCharacters,
+          ...this.remoteCharacters
+        ];
+      });
+    } else {
+      this.remoteCharacters = this.comicService.getCharacters();
+      this.localCharacters = this.comicService.getNewCharacterList() || [];
+      this.allCharacters = [...this.localCharacters, ...this.remoteCharacters];
+      this.selectedComicTitle = this.comicService.getSelectedComicName();
+      this.selectedComics = this.comicService.getSelectedComic();
+    }
   }
 }
 
@@ -91,7 +117,7 @@ export class AddCharacterDialog {
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
-  onNoClick(): void {
+  onClose(): void {
     this.dialogRef.close();
   }
 }
@@ -106,7 +132,7 @@ export class DeleteCharacterDialog {
     private comicService: ComicService
   ) {}
 
-  onNoClick(): void {
+  onClose(): void {
     this.deleteDialogRef.close();
   }
 

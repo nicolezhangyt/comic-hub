@@ -23,31 +23,6 @@
   </div>
   <div>
     <div *ngIf="allCharacters" class="character-list">
-      <!-- <div *ngIf="newCharactersList">
-        <ul class="characterList" *ngFor="let newcharacter of newCharactersList">
-          <div class="character-card">
-              <div
-                class="button-delete"
-                (click)="openDeleteDialog(newcharacter.id)"
-              >
-                X
-              </div>
-              <div class="character-image">
-            <img
-              src="{{ newcharacter.imageUrl }}"
-              onError="this.onerror=null;this.alt='Image not found';"
-              width="120px"
-              height="150px"
-            />
-            </div>
-            <div class="character-intro">
-            <h4>{{ newcharacter.name }}</h4>
-            {{ newcharacter.description }}
-            </div>
-          </div>
-        </ul>
-      </div> -->
-
       <ul class="characterList" *ngFor="let character of allCharacters">
         <div class="character-card">
           <div

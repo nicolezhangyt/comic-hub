@@ -1,4 +1,5 @@
 export interface Comics {
+  characters: character[];
   id: string;
   name: string;
   image: string;

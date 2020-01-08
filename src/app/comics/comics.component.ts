@@ -22,7 +22,7 @@ export class ComicsComponent implements OnInit {
 
   ngOnInit() {
     if (!this.comicService.getComicsList().length) {
-      this.getComics().subscribe(comics => {
+      this.comicService.getComics().subscribe(comics => {
         this.comicService.addComics(comics);
         this.comics = this.comicService.getComicsList();
       });
@@ -31,24 +31,9 @@ export class ComicsComponent implements OnInit {
     }
   }
 
-  private comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
-
-  private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
-  }
-
-  getComics(): Observable<Comics[]> {
-    return this.http
-      .get<Comics[]>(this.comicsUrl)
-      .pipe(catchError(this.handleError<Comics[]>("getComics", [])));
-  }
-
   onSelect = (comic: Comics) => {
     this.comicService.setSelectedComicId(comic.id, comic.name);
-    this.router.navigate(["/comics", comic.name.replace(/[^a-z0-9]+/gi, "-")]);
+    this.router.navigate(["/comics", comic.name.replace(/[^a-z0-9]+/gi, "-"), comic.id]);
     this.selectedComicTitle = this.comicService.getSelectedComicName();
   };
 }

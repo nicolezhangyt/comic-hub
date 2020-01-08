@@ -8,7 +8,7 @@ const routes: Routes = [
     path: "",
     component: ComicsComponent
   },
-  { path: "comics/:name", component: ComicDetailComponent }
+  { path: "comics/:name/:id", component: ComicDetailComponent }
 ];
 
 @NgModule({

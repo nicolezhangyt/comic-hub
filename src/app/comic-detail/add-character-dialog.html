@@ -27,12 +27,13 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onNoClick()">Close</button>
+  <button mat-raised-button (click)="onClose()">Close</button>
   <button
     color="primary"
     mat-raised-button
     [mat-dialog-close]="data"
     cdkFocusInitial
+    [disabled]="!data.image || !data.description || !data.name"
   >
     Add
   </button>
