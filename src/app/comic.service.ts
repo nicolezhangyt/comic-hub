@@ -5,7 +5,6 @@ import { HttpHeaders } from "@angular/common/http";
 import { HttpClient } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
 
-
 @Injectable({
   providedIn: "root"
 })
@@ -15,11 +14,9 @@ export class ComicService {
   newCharacters = {};
   selectedComicId: string;
 
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
-   comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
+  comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
@@ -49,7 +46,6 @@ export class ComicService {
     return selectedComic ? selectedComic.characters : null;
   }
 
-
   getSelectedComic() {
     const selectedComic = this.comics.find(
       comic => comic.id === this.selectedComicId
@@ -78,13 +74,11 @@ export class ComicService {
       this.newCharacters[this.selectedComicId] = [];
     }
     this.newCharacters[this.selectedComicId].unshift(newCharacter);
-   
   }
 
   getNewCharacterList() {
     return this.newCharacters[this.selectedComicId];
   }
-
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })

@@ -26,20 +26,23 @@
       <ul class="characterList" *ngFor="let character of allCharacters">
         <div class="character-card">
           <div
-                *ngIf="!character.hasOwnProperty('numberOfRoles')"
-                class="button-delete"
-                (click)="openDeleteDialog(character.id)"
-              >
-                X
-              </div>
-              <div
-              *ngIf="character.hasOwnProperty('numberOfRoles')"
-              class="button-delete"
-              (click)="openDeleteDialog(character.id)"
-            >
-              <br/>
-            </div>
-          <div class="character-image" *ngIf="character.hasOwnProperty('image')">
+            *ngIf="!character.hasOwnProperty('numberOfRoles')"
+            class="button-delete"
+            (click)="openDeleteDialog(character.id)"
+          >
+            X
+          </div>
+          <div
+            *ngIf="character.hasOwnProperty('numberOfRoles')"
+            class="button-delete"
+            (click)="openDeleteDialog(character.id)"
+          >
+            <br />
+          </div>
+          <div
+            class="character-image"
+            *ngIf="character.hasOwnProperty('image')"
+          >
             <img
               src="{{ character.image }}"
               width="120px"
@@ -47,20 +50,24 @@
               onError="this.onerror=null;this.src='assets/img-error.png';"
             />
           </div>
-          <div class="character-image" *ngIf="character.hasOwnProperty('images')">
-              <img
-                src="{{ character.images }}"
-                width="120px"
-                height="150px"
-              />
-            </div>
-          <div *ngIf="character.numberOfRoles >= 2000" class="character-intro">
-            <h4 class="character-name">{{ character.name }}<span class="banner">Popular</span></h4>
-            <div class="description" >{{ character.description }} </div>
+          <div
+            class="character-image"
+            *ngIf="character.hasOwnProperty('images')"
+          >
+            <img src="{{ character.images }}" width="120px" height="150px" />
           </div>
-          <div *ngIf="character.numberOfRoles < 2000 || !character.numberOfRoles " class="character-intro">
+          <div *ngIf="character.numberOfRoles >= 2000" class="character-intro">
+            <h4 class="character-name">
+              {{ character.name }}<span class="banner">Popular</span>
+            </h4>
+            <div class="description">{{ character.description }}</div>
+          </div>
+          <div
+            *ngIf="character.numberOfRoles < 2000 || !character.numberOfRoles"
+            class="character-intro"
+          >
             <h4 class="character-name">{{ character.name }}</h4>
-            <div class="description">{{ character.description }} </div>
+            <div class="description">{{ character.description }}</div>
           </div>
           <br />
         </div>

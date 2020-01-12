@@ -10,8 +10,4 @@ export class AppComponent {
   comicTitle: string = "";
   title = "COMIC HUB";
   constructor(private router: Router) {}
-
-  // ngOnInit() {
-  //   this.router.navigate([""]);
-  // }
 }
