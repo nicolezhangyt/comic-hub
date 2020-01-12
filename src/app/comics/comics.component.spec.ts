@@ -1,16 +1,21 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { ComicsComponent } from "./comics.component";
-
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { HttpClientModule } from "@angular/common/http";
+import { AppRoutingModule } from "../app-routing.module";
+import { ComicDetailComponent } from "../comic-detail/comic-detail.component";
 
 
 describe("ComicsComponent", () => {
   let component: ComicsComponent;
   let fixture: ComponentFixture<ComicsComponent>;
+  
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ComicsComponent]
+      declarations: [ComicDetailComponent,ComicsComponent],
+      imports: [MatToolbarModule, HttpClientModule, AppRoutingModule],
     }).compileComponents();
   }));
 
@@ -22,5 +27,6 @@ describe("ComicsComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-  });
-  });
+  }); 
+
+});

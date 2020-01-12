@@ -86,9 +86,8 @@ export class ComicDetailComponent implements OnInit {
         this.comics = this.comicService.getComicsList();
         this.id = this.route.snapshot.paramMap.get("id");
         this.selectedComics = this.comics.find(comic => comic.id == this.id);
-        this.selectedComicTitle = this.comics.find(
-          comic => comic.id == this.id
-        ).name;
+        this.selectedComicTitle = this.selectedComics.name;
+
         this.remoteCharacters = this.selectedComics.characters;
         this.localCharacters = this.localCharacters =
           this.comicService.getNewCharacterList() || [];

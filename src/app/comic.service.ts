@@ -19,7 +19,7 @@ export class ComicService {
     private http: HttpClient,
   ) {}
 
-  private comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
+   comicsUrl = "https://propertymecomics.s3.amazonaws.com/comics";
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
@@ -63,9 +63,6 @@ export class ComicService {
     );
     this.newCharacters[this.selectedComicId] = filteredCharacter;
   }
-
- 
-
 
   setSelectedComicId(id: string, name: string) {
     this.selectedComicId = id;

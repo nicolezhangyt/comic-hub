@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {  RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDialogModule,
     MatCardModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    RouterModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]

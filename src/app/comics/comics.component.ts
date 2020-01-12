@@ -1,9 +1,6 @@
 import { Component, OnInit, Output } from "@angular/core";
 import { Comics } from "./types";
 import { ComicService } from "../comic.service";
-import { Observable, of } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 @Component({
@@ -16,7 +13,6 @@ export class ComicsComponent implements OnInit {
   selectedComicTitle: string = "";
   constructor(
     private comicService: ComicService,
-    private http: HttpClient,
     private router: Router
   ) {}
 
@@ -34,6 +30,6 @@ export class ComicsComponent implements OnInit {
   onSelect = (comic: Comics) => {
     this.comicService.setSelectedComicId(comic.id, comic.name);
     this.router.navigate(["/comics", comic.name.replace(/[^a-z0-9]+/gi, "-"), comic.id]);
-    this.selectedComicTitle = this.comicService.getSelectedComicName();
+    this.selectedComicTitle = comic.name;
   };
 }
