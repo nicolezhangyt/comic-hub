@@ -6,8 +6,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { ComicsComponent } from "../comics/comics.component";
 import { HttpClientModule } from "@angular/common/http";
-import { By } from "@angular/platform-browser";
-import { AppModule } from '../app.module';
+
 
 describe("ComicDetailComponent", () => {
   let component: ComicDetailComponent;
@@ -32,8 +31,6 @@ describe("ComicDetailComponent", () => {
   });
 
   it("should create", () => {
-
-
     expect(component).toBeTruthy();
   });
 });

@@ -16,7 +16,7 @@
         </div>
         <div class="intro">
           <h2>{{ selectedComics.name }}</h2>
-          {{ selectedComics.description }}
+          <p>{{ selectedComics.description }}</p>
         </div>
       </div>
     </ul>
@@ -55,12 +55,12 @@
               />
             </div>
           <div *ngIf="character.numberOfRoles >= 2000" class="character-intro">
-            <h4>{{ character.name }}<span class="banner">Popular</span></h4>
-            {{ character.description }}
+            <h4 class="character-name">{{ character.name }}<span class="banner">Popular</span></h4>
+            <div class="description" >{{ character.description }} </div>
           </div>
           <div *ngIf="character.numberOfRoles < 2000 || !character.numberOfRoles " class="character-intro">
-            <h4>{{ character.name }}</h4>
-            {{ character.description }}
+            <h4 class="character-name">{{ character.name }}</h4>
+            <div class="description">{{ character.description }} </div>
           </div>
           <br />
         </div>

@@ -45,10 +45,16 @@ button {
   min-height: 270px;
 }
 .character-intro {
-  height: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   padding: 15px;
+}
+
+.character-name {
+  height:35px;
+}
+
+.description {
+  height:200px;
+  overflow: scroll;
 }
 
 .toolbar {
@@ -110,4 +116,59 @@ button {
   border-radius: 10px;
   text-align: center;
   margin-left: 10px;
+}
+
+@media only screen and (max-width: 1124px){
+  .character-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media only screen and (max-width: 900px){
+  .character-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 760px){
+  .character-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .description {
+    height:180px;
+    overflow: scroll;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .character-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .description {
+    height:150px;
+    overflow: scroll;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .character-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .description {
+    height:180px;
+    overflow: scroll;
+  }
+  .character-name {
+    height:25px;
+  }
+  .intro h2 {
+    font-size:large;
+  }
+  .intro p {
+    font-size: medium;
+  }
+  .button-delete{
+    margin-left: 95%;
+  }
+
 }
