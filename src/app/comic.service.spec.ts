@@ -57,7 +57,7 @@ describe("TestService", () => {
     expect(service.getSelectedComicName()).toBe("comicname2");
   });
 
-  it("should add new character", () => {
+  it("should add a new character", () => {
     const service: ComicService = TestBed.get(ComicService);
     const newCharacter = {
       id: 1,
@@ -67,6 +67,11 @@ describe("TestService", () => {
     };
     service.addNewCharacter(newCharacter);
     expect(service.getNewCharacterList().length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("should not return new character", () => {
+    const service: ComicService = TestBed.get(ComicService);
+    expect(service.getNewCharacterList()).toBeUndefined();
   });
 
   it("should delete a character", () => {
